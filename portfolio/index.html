@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mr Wilson | Web Design, Mombasa</title>
+<meta name="description" content="Mr Wilson builds simple, affordable one-page websites for businesses in Mombasa. Live within a week, first draft free.">
+<style>
+  :root{--ink:#22252a;--soft:#f7f6f2;--gold:#c79a5b;--line:#e6e2d8}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:Helvetica,Arial,sans-serif;color:var(--ink);background:var(--soft);line-height:1.6}
+  h1,h2,h3{font-family:Georgia,'Times New Roman',serif;font-weight:400}
+  .hero{position:relative;min-height:92vh;display:flex;align-items:center;color:#fff;background:#2a2622 url("https://storage.googleapis.com/wajo-ai-agentnet-uploads-nam4/users/6591ba31-ae12-43c0-91b0-89ec89892323/sessions/908f24b5-9465-4dab-b6fb-a3ef3e08b6bd/be247e8f-2628-4144-b79c-51a4f5744172/laptop-workspace-desk-building-website-minimal-593673.jpg") center/cover no-repeat}
+  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(24,20,17,.85) 0%,rgba(24,20,17,.55) 100%)}
+  .hero-in{position:relative;z-index:1;max-width:640px;padding:64px 24px}
+  .eyebrow{letter-spacing:.3em;text-transform:uppercase;font-size:.72rem;color:#e8d9bd}
+  h1{font-size:clamp(2.2rem,5.5vw,3.6rem);margin:12px 0 14px;line-height:1.12}
+  .hero p{font-size:1.08rem;opacity:.94;max-width:520px}
+  .btn{display:inline-block;margin-top:26px;padding:14px 32px;background:var(--gold);color:#fff;text-decoration:none;border-radius:999px;font-size:.95rem;letter-spacing:.03em}
+  .btn:hover{background:#b1833f}
+  .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,.55);margin-left:12px}
+  .btn.ghost:hover{background:rgba(255,255,255,.12)}
+  section{max-width:960px;margin:0 auto;padding:72px 24px}
+  h2{text-align:center;font-size:1.9rem;margin-bottom:6px}
+  .rule{width:56px;height:2px;background:var(--gold);margin:14px auto 34px}
+  .lead{max-width:640px;margin:0 auto;text-align:center;color:#565148}
+  .work{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px}
+  .job{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;text-decoration:none;color:var(--ink);display:block;transition:transform .15s ease, box-shadow .15s ease}
+  .job:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(0,0,0,.08)}
+  .job img{width:100%;height:170px;object-fit:cover;display:block}
+  .job .pad{padding:20px 20px 24px}
+  .job h3{font-size:1.2rem;margin-bottom:6px}
+  .job p{font-size:.92rem;color:#5d564d}
+  .tag{display:inline-block;margin-top:14px;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gold)}
+  .svc{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+  .svc .card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:24px 22px;text-align:center}
+  .svc h3{font-size:1.1rem;margin-bottom:6px}
+  .svc p{font-size:.93rem;color:#5d564d}
+  .pricing{background:#fff;border:1px solid var(--line);border-radius:12px;max-width:620px;margin:34px auto 0;padding:30px 28px;text-align:center}
+  .pricing strong{font-size:1.5rem;font-family:Georgia,serif;font-weight:400;display:block;color:var(--ink)}
+  .pricing small{color:#8a8177;font-size:.85rem}
+  .contact{background:#22252a;color:#fff;text-align:center}
+  .contact h2{color:#fff}
+  .contact .lines{margin:16px 0;font-size:1.02rem}
+  .contact a{color:#25d366;text-decoration:none;font-weight:600}
+  footer{background:#171a1d;color:#9aa0a6;text-align:center;padding:20px;font-size:.8rem}
+  .wa{position:fixed;right:18px;bottom:18px;width:56px;height:56px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,.25);text-decoration:none;z-index:5}
+  .wa svg{width:30px;height:30px;fill:#fff}
+  @media(max-width:560px){.btn.ghost{margin:12px 0 0;display:block}.hero-in{padding:56px 20px}}
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="hero-in">
+    <div class="eyebrow">Web design &middot; Mombasa, Kenya</div>
+    <h1>Mr Wilson builds simple websites that bring in customers</h1>
+    <p>One-page websites for hotels, tours, spas and shops: your photos, your prices, a WhatsApp booking button and your own web address. Live within a week, first draft always free.</p>
+    <a class="btn" href="https://wa.me/254700640607?text=Hi%20Mr%20Wilson%2C%20I%27d%20like%20a%20website%20for%20my%20business.">Chat on WhatsApp</a>
+    <a class="btn ghost" href="#work">See recent work</a>
+  </div>
+</div>
+
+<section id="work">
+  <h2>Recent work</h2>
+  <div class="rule"></div>
+  <div class="work">
+    <a class="job" href="https://wmuinde.github.io/spa/">
+      <img loading="lazy" src="https://lh3.googleusercontent.com/grass-cs/AABkmLdh1Koi1FRyqiJF5YdTk_ABorONw-o0XZi3ztNJjbzdQeLJrHsch6zMxDSUV_EaNPd6O_L6ExShs3NuZACehEL5kvUUNNMdMdiyJzuWTq1m_ER6Kexb_-IdBQ30P218HYLerjLyKdDL6dkd=s1600" alt="Queens City Spa website draft">
+      <div class="pad"><h3>Queens City Spa Wellness Centre</h3><p>A spa website built from the client's own Google Maps photos, with a WhatsApp booking button.</p><span class="tag">View draft &rarr;</span></div>
+    </a>
+    <a class="job" href="https://wmuinde.github.io/">
+      <img loading="lazy" src="https://lh3.googleusercontent.com/grass-cs/AABkmLeC-KAbQFRbgHp6MvZb16vUPEbzbl0Ke5-VWfdxVqI56z81RTi2QOU1MnFIwIpsafBLdi0dksAm-YbVjH14xyUU_6hSzqQ4VgJRmTbn6oYEXcDd0Z-v7c_C07eJJYTIgepvjyOb1zr5HqOd=s4800-w1600-h1024" alt="Bishamz Tours website draft">
+      <div class="pad"><h3>Bishamz Tours &amp; Safaris</h3><p>A tour company site with services, reviews, photos and instant WhatsApp booking, written from their Google listing.</p><span class="tag">View draft &rarr;</span></div>
+    </a>
+    <a class="job" href="https://wmuinde.github.io/ketty/">
+      <img loading="lazy" src="https://lh3.googleusercontent.com/grass-cs/AABkmLdiANg4w5QiQFspsSVY2Yp2mA7widCUiuQJOuEFjJFQfq-kYzGc-1xTeeTx4HI1-En4KuKak-KE-GTcLTQv10LKarnw79YZVDrPnUm2vK-NTpGOpbYhWAOkeoJaqmBA-r2zRwWqQStAIcIO=s4800-w1600-h1024" alt="Ketty Tours website draft">
+      <div class="pad"><h3>Ketty Tours &amp; Travel</h3><p>A clean one-page site for a Mombasa travel agency, with safari packages and enquiry buttons.</p><span class="tag">View draft &rarr;</span></div>
+    </a>
+  </div>
+</section>
+
+<section>
+  <h2>What I build</h2>
+  <div class="rule"></div>
+  <div class="svc">
+    <div class="card"><h3>One-page websites</h3><p>Everything a small business needs on one fast page: services, prices, photos, hours and directions.</p></div>
+    <div class="card"><h3>WhatsApp booking buttons</h3><p>Customers tap once and land in the owner's WhatsApp with the message already written.</p></div>
+    <div class="card"><h3>Own web address</h3><p>A proper name like yourbusiness.co.ke, connected to fast free hosting, no monthly fees.</p></div>
+    <div class="card"><h3>Google-ready setup</h3><p>Built to show up in Google search and look right next to your Google Maps listing.</p></div>
+  </div>
+  <div class="pricing">
+    <small>Most one-page sites</small>
+    <strong>KSh 12,000 one-off</strong>
+    <small>Includes your domain for the first year, then KSh 2,000 a year to keep it live and updated. Every project starts with a free draft.</small>
+  </div>
+</section>
+
+<section class="contact" style="max-width:none">
+  <div style="max-width:700px;margin:0 auto">
+    <h2>Start with a free draft</h2>
+    <p class="lines">Tell me about your business and I'll build the first draft free, no commitment.<br>
+    WhatsApp or call: <a href="tel:+254700640607">0700 640 607</a><br>
+    Email: <a href="mailto:wmuinde984@gmail.com">wmuinde984@gmail.com</a></p>
+    <a class="btn" href="https://wa.me/254700640607?text=Hi%20Mr%20Wilson%2C%20I%27d%20like%20a%20website%20for%20my%20business.">Message Mr Wilson on WhatsApp</a>
+  </div>
+</section>
+
+<footer>Mr Wilson &middot; Web design for local businesses &middot; Mombasa, Kenya</footer>
+
+<a class="wa" href="https://wa.me/254700640607?text=Hi%20Mr%20Wilson%2C%20I%27d%20like%20a%20website%20for%20my%20business." aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 32 32"><path d="M16 3C9.4 3 4 8.3 4 14.9c0 2.6.8 5 2.3 7L4 29l7.3-2.3c1.9 1 4 1.6 6.2 1.6h.5c6.6 0 12-5.3 12-11.9S22.6 3 16 3zm5.9 15.1c-.3.8-1.7 1.6-2.4 1.7-.6.1-1.4.1-2.2-.1-.5-.2-1.2-.4-2-.8-3.6-1.5-5.9-5.2-6.1-5.4-.2-.2-1.4-1.9-1.4-3.6s.9-2.6 1.2-2.9c.3-.3.7-.4 1-.4h.7c.2 0 .5-.1.8.6.3.8 1 2.7 1.1 2.9.1.2.2.4 0 .7-.1.3-.2.4-.4.7l-.6.7c-.2.2-.4.4-.2.8.2.4 1 1.6 2.2 2.6 1.5 1.4 2.8 1.8 3.2 2 .4.2.6.2.9-.1.2-.3 1-1.2 1.3-1.6.3-.4.5-.3.9-.2.4.1 2.3 1.1 2.7 1.3.4.2.6.3.7.5.1.2.1.9-.2 1.7z"/></svg>
+</a>
+</body>
+</html>
