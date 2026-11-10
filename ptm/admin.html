@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PTM Admin - Buyers</title>
+<style>
+  body{ font-family:'Segoe UI',system-ui,Arial,sans-serif; background:#f7f5ef; color:#1e2a22; padding:24px; max-width:900px; margin:0 auto; }
+  h1{ font-size:1.3rem; color:#12331f; margin-bottom:6px; }
+  p.hint{ color:#6a7a70; font-size:.9rem; margin-bottom:18px; }
+  table{ width:100%; border-collapse:collapse; background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 1px 4px rgba(0,0,0,.06); }
+  th,td{ padding:10px 12px; border-bottom:1px solid #eee6d6; text-align:left; font-size:.92rem; vertical-align:top; }
+  th{ background:#12331f; color:#fff; }
+  input{ width:100%; padding:8px; border:1px solid #cfc9b8; border-radius:6px; font-size:.9rem; box-sizing:border-box; }
+  .btn{ margin-top:14px; background:#1a7a3c; color:#fff; border:none; padding:10px 18px; border-radius:8px; font-weight:700; cursor:pointer; margin-right:8px; }
+  .btn.dark{ background:#12331f; }
+  .mini{ background:#eef4ee; color:#12331f; border:1px solid #cfc9b8; padding:6px 10px; border-radius:6px; font-weight:600; cursor:pointer; font-size:.85rem; margin-top:4px; }
+  .code{ font-family:monospace; font-weight:700; background:#fff3cd; border:1px dashed #c9a227; padding:2px 6px; border-radius:6px; }
+  .empty{ color:#6a7a70; font-style:italic; }
+  .count{ color:#6a7a70; font-size:.85rem; margin-top:10px; }
+</style>
+</head>
+<body>
+<h1>Potato Truck Manager: buyers</h1>
+<p class="hint">When M-Pesa lands, add the buyer here, tap Generate code, then tap Send on WhatsApp to deliver the code. Everything is saved in this browser only, so open it on the phone or computer you keep for the business.</p>
+<table>
+  <thead><tr><th style="width:110px">Date</th><th>Name</th><th style="width:120px">Phone</th><th style="width:130px">M-Pesa code</th><th style="width:180px">Activation code</th></tr></thead>
+  <tbody id="rows"><tr><td colspan="5" class="empty">No buyers yet.</td></tr></tbody>
+</table>
+<button class="btn" onclick="addRow()">+ Add buyer</button>
+<button class="btn dark" onclick="exportCSV()">Export CSV</button>
+<p class="count" id="count"></p>
+<script src="config.js"></script>
+<script>
+var LS="PTM_BUYERS";
+function load(){ try{ return JSON.parse(localStorage.getItem(LS))||[]; }catch(e){ return []; } }
+function save(list){ localStorage.setItem(LS, JSON.stringify(list)); }
+function genCode(){
+  var chars="ABCDEFGHJKMNPQRSTUVWXYZ23456789", c="PTM-";
+  for(var i=0;i<6;i++) c+=chars[Math.floor(Math.random()*chars.length)];
+  return c;
+}
+function addRow(b){
+  var t=document.getElementById('rows'); var empty=t.querySelector('.empty'); if(empty) empty.remove();
+  var tr=document.createElement('tr'); tr.className='row';
+  var d=b&&b.date?b.date:new Date().toISOString().slice(0,10);
+  tr.innerHTML='<td><input type="date" value="'+d+'"></td>'
+   +'<td><input placeholder="Name" value="'+(b&&b.name?b.name:'')+'"></td>'
+   +'<td><input placeholder="07XX..." value="'+(b&&b.phone?b.phone:'')+'"></td>'
+   +'<td><input placeholder="M-Pesa code" value="'+(b&&b.mpesa?b.mpesa:'')+'"></td>'
+   +'<td>'+(b&&b.code?'<span class="code">'+b.code+'</span> ':'<span class="nocode" style="color:#c9a227">no code yet</span>')
+   +'<br><button class="mini" onclick="genFor(this)">'+(b&&b.code?'Regenerate':'Generate code')+'</button>'
+   +(b&&b.code?' <button class="mini" onclick="sendWa(this)">Send on WhatsApp</button>':'')+'</td>';
+  t.appendChild(tr);
+  collect();
+}
+function readRow(tr){
+  var i=tr.querySelectorAll('input');
+  return { date:i[0].value, name:i[1].value, phone:i[2].value, mpesa:i[3].value };
+}
+function genFor(btn){
+  var tr=btn.closest('tr'), td=btn.closest('td'), code=genCode();
+  td.querySelector('.nocode') && td.querySelector('.nocode').remove();
+  var old=td.querySelector('.code'); if(old) old.remove();
+  var span=document.createElement('span'); span.className='code'; span.textContent=code;
+  td.insertBefore(span, btn);
+  btn.textContent='Regenerate';
+  if(!td.querySelector('.sendbtn')){ var s=document.createElement('button'); s.className='mini sendbtn'; s.textContent='Send on WhatsApp'; s.onclick=function(){ sendWa(s); }; td.insertBefore(document.createElement('br'), null); td.appendChild(s); }
+  collect();
+}
+function sendWa(btn){
+  var tr=btn.closest('tr'), td=btn.closest('td');
+  var code=td.querySelector('.code')?td.querySelector('.code').textContent:'';
+  var b=readRow(tr);
+  var C=window.PTM_CONFIG||{};
+  var num=(b.phone||'').replace(/\D/g,''); if(num.length===10&&num[0]==='0') num='254'+num.slice(1);
+  var msg='Hi'+(b.name?' '+b.name:'')+', this is Wilson. Thank you for buying Potato Truck Manager. Your activation code is '+code+'. Download: '+(C.downloadLink||'[download link]')+'. Any questions, just reply here.';
+  window.open('https://wa.me/'+num+'?text='+encodeURIComponent(msg),'_blank');
+}
+function collect(){
+  var list=[];
+  document.querySelectorAll('tr.row').forEach(function(tr){ var b=readRow(tr); var c=tr.querySelector('.code'); b.code=c?c.textContent:''; list.push(b); });
+  save(list);
+  document.getElementById('count').textContent=list.length+' buyer'+(list.length===1?'':'s')+' saved in this browser.';
+}
+function exportCSV(){
+  var rows=[['date','name','phone','mpesa_code','activation_code']];
+  document.querySelectorAll('tr.row').forEach(function(tr){ var b=readRow(tr); var c=tr.querySelector('.code'); rows.push([b.date,b.name,b.phone,b.mpesa,c?c.textContent:'']); });
+  var csv=rows.map(function(r){ return r.map(function(x){ return '"'+String(x).replace(/"/g,'""')+'"'; }).join(','); }).join('\n');
+  var a=document.createElement('a'); a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv); a.download='ptm_buyers.csv'; a.click();
+}
+(function(){ load().forEach(function(b){ addRow(b); }); document.getElementById('rows').addEventListener('input', collect); })();
+</script>
+</body>
+</html>

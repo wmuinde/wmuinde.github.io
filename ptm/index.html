@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Potato Truck Manager - Know who owes you, bag by bag</title>
+<style>
+  :root{ --green:#1a7a3c; --dark:#12331f; --paper:#f7f5ef; --ink:#1e2a22; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ font-family:'Segoe UI',system-ui,Arial,sans-serif; background:var(--paper); color:var(--ink); line-height:1.55; }
+  header{ background:var(--dark); color:#fff; padding:18px 20px; display:flex; align-items:center; gap:12px; }
+  header img{ width:44px; height:44px; border-radius:10px; }
+  header h1{ font-size:1.15rem; font-weight:700; }
+  header span{ display:block; font-size:.78rem; opacity:.8; font-weight:400; }
+  .hero{ padding:36px 20px 28px; text-align:center; background:linear-gradient(180deg,#e8f2e6,var(--paper)); }
+  .hero img{ width:96px; height:96px; border-radius:22px; box-shadow:0 6px 18px rgba(0,0,0,.18); }
+  .hero h2{ font-size:1.7rem; margin:14px auto 8px; max-width:560px; }
+  .hero p{ max-width:520px; margin:0 auto 20px; color:#4a5a50; }
+  .btn{ display:inline-block; background:var(--green); color:#fff; text-decoration:none; font-weight:700; padding:14px 34px; border-radius:10px; font-size:1.05rem; }
+  .price-tag{ display:block; margin-top:10px; font-size:.95rem; color:var(--dark); font-weight:600; }
+  section{ max-width:760px; margin:0 auto; padding:26px 20px; }
+  section h3{ font-size:1.25rem; margin-bottom:12px; color:var(--dark); }
+  ul.feat{ list-style:none; }
+  ul.feat li{ padding:8px 0 8px 30px; position:relative; }
+  ul.feat li::before{ content:"✔"; position:absolute; left:0; color:var(--green); font-weight:700; }
+  .how{ background:#fff; border:1px solid #e2ddcf; border-radius:14px; padding:20px; }
+  .how ol{ margin-left:20px; }
+  .how ol li{ padding:5px 0; }
+  .buy-box{ background:#fff; border:2px solid var(--green); border-radius:16px; padding:22px; text-align:center; }
+  .buy-box .amount{ font-size:2.2rem; font-weight:800; color:var(--dark); }
+  .buy-box .amount small{ font-size:.9rem; font-weight:400; color:#6a7a70; }
+  .mpesa{ text-align:left; background:#f2f8f2; border-radius:10px; padding:14px 16px; margin:16px 0; font-size:.95rem; }
+  .mpesa b{ color:var(--dark); }
+  .ph{ background:#fff3cd; border:1px dashed #c9a227; padding:2px 8px; border-radius:6px; font-weight:700; font-family:monospace; }
+  .shots{ display:flex; overflow-x:auto; gap:16px; padding:4px 2px 12px; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; }
+  .shot{ flex:0 0 auto; width:208px; scroll-snap-align:center; }
+  .shot img{ width:100%; border-radius:18px; border:5px solid #12331f; box-shadow:0 6px 16px rgba(0,0,0,.15); background:#fff; }
+  .shot p{ font-size:.8rem; color:#4a5a50; text-align:center; margin-top:6px; }
+  .note{ font-size:.85rem; color:#6a7a70; margin-top:14px; }
+  form{ text-align:left; margin-top:8px; }
+  label{ display:block; font-size:.85rem; font-weight:600; margin:12px 0 4px; }
+  input{ width:100%; padding:11px 12px; border:1px solid #cfc9b8; border-radius:8px; font-size:1rem; }
+  button{ width:100%; margin-top:16px; background:var(--green); border:none; color:#fff; font-weight:700; font-size:1.05rem; padding:13px; border-radius:10px; cursor:pointer; }
+  #formResult{ display:none; margin-top:14px; background:#e8f2e6; border:1px solid var(--green); border-radius:10px; padding:14px; font-size:.95rem; }
+  footer{ text-align:center; padding:26px 20px 34px; color:#6a7a70; font-size:.85rem; }
+  footer a{ color:var(--green); font-weight:600; }
+</style>
+</head>
+<body>
+
+<header>
+  <img src="icon.png" alt="App icon">
+  <h1>Potato Truck Manager <span>by Mr Wilson</span></h1>
+</header>
+
+<div class="hero">
+  <img src="icon.png" alt="Potato Truck Manager icon">
+  <h2>Know who owes you, bag by bag, before the truck leaves.</h2>
+  <p>Snap the paper list and the app reads every name, every bag and every price. Track your debtor list, your paid bags and every truck you run, right on your phone. Works offline, in KES.</p>
+  <a class="btn" href="#buy">Buy once, own it forever</a>
+  <span class="price-tag">KES 1,000 one-time. No monthly fees. Free updates for a year.</span>
+</div>
+
+<section>
+  <h3>See it in action</h3>
+  <video src="demo.mp4" controls muted loop playsinline poster="shots/1_dashboard.png" style="width:100%;max-width:340px;display:block;margin:0 auto 10px;border-radius:18px;border:5px solid #12331f;box-shadow:0 6px 16px rgba(0,0,0,.15);background:#000"></video>
+  <p style="text-align:center;font-size:.85rem;color:#4a5a50;margin:0 0 18px">Watch the demo: the dashboard, recording a sale with the price shortcut, debts, and Snap &amp; Save. Swipe through the still shots below.</p>
+  <div class="shots"><div class="shot"><img src="shots/1_dashboard.png" alt="1 dashboard"><p>Your fleet at a glance: revenue, profit, and what you are still owed</p></div><div class="shot"><img src="shots/2_truck_overview.png" alt="2 truck overview"><p>Every truck: bags left, money in, profit, one tap to record a sale</p></div><div class="shot"><img src="shots/3_sales.png" alt="3 sales"><p>Transactions: who paid, how, and who still owes</p></div><div class="shot"><img src="shots/4_record_sale.png" alt="4 record sale"><p>Type 50, it knows KES 5,000. The full total shows before you save</p></div><div class="shot"><img src="shots/5_debts.png" alt="5 debts"><p>Debts per truck, with one-tap Record Payment</p></div><div class="shot"><img src="shots/6_snap_save.png" alt="6 snap save"><p>Snap & Save: your paper list becomes clean entries</p></div><div class="shot"><img src="shots/7_all_debtors.png" alt="7 all debtors"><p>Everyone who owes you, across every truck, on one page</p></div></div>
+</section>
+
+<section>
+  <h3>What it does</h3>
+  <ul class="feat">
+    <li><b>Snap &amp; Save debtor list:</b> photo of your paper list becomes names, bags and amounts owed.</li>
+    <li><b>Snap &amp; Save totals sheet:</b> your price × bags math becomes sold bags and paid amounts.</li>
+    <li><b>Dashboard:</b> total debts across every truck, one look.</li>
+    <li><b>All-vehicles debtors page:</b> everyone who owes you, from every truck, in one place.</li>
+    <li><b>Price shortcuts:</b> type 55, it knows 5,500. Every price shows in full before you save.</li>
+    <li><b>Password protected:</b> your business data stays yours.</li>
+    <li><b>Works offline:</b> only the AI scan needs internet.</li>
+  </ul>
+</section>
+
+<section>
+  <div class="how">
+    <h3>How to buy</h3>
+    <ol>
+      <li><b>Pay KES 1,000</b> via M-Pesa using the details below.</li>
+      <li><b>Fill the form</b> with your phone number and the M-Pesa confirmation code.</li>
+      <li><b>Get your activation code</b> by WhatsApp or SMS, then download and activate. The app is bound to your phone, yours forever.</li>
+    </ol>
+  </div>
+</section>
+
+<section id="buy">
+  <div class="buy-box">
+    <h3>Buy now</h3>
+    <div class="amount">KES 1,000 <small>one-time</small></div>
+    <div class="mpesa">
+      <b>Pay via M-Pesa:</b><br>
+      <span id="phPaybillLabel">Paybill / Till number</span>: <span class="ph" id="phPaybill">[PAYBILL OR TILL NUMBER]</span><br>
+      Name: Wilson Muinde<br>
+      Amount: KES 1,000
+    </div>
+    <form id="buyForm">
+      <label for="fPhone">Your M-Pesa phone number</label>
+      <input id="fPhone" type="tel" placeholder="07XX XXX XXX" required>
+      <label for="fCode">M-Pesa confirmation code</label>
+      <input id="fCode" type="text" placeholder="e.g. QGH7XYZ123" required>
+      <button type="submit">I have paid, get my activation code</button>
+    </form>
+    <div id="formResult">
+      Thank you! Your payment details were received. Your activation code and download link will be sent to your number shortly.<br><br>
+      Download the app here: <a id="phDownload" href="#" class="ph">[DOWNLOAD LINK]</a><br>
+      Questions? WhatsApp <a id="phWa" class="ph" href="#">[WHATSAPP NUMBER]</a>
+    </div>
+    <p class="note">One licence activates one phone. Changed phones? Contact us and we reissue your code free.</p>
+  </div>
+</section>
+
+<footer>
+  Potato Truck Manager · Mombasa, Kenya<br>
+  Support: WhatsApp <a id="phWaFooter" class="ph" href="#">[WHATSAPP NUMBER]</a>
+</footer>
+
+<script src="config.js"></script>
+<script>
+(function(){
+ var C = window.PTM_CONFIG || {};
+ function t(id,v){ var e=document.getElementById(id); if(e&&v) e.textContent=v; }
+ function l(id,url,label){ var e=document.getElementById(id); if(e&&url){ e.href=url; e.textContent=label; } }
+ if(C.paybill){ t('phPaybill', C.paybill); t('phPaybillLabel', C.paybillLabel||'Paybill number'); }
+ if(C.downloadLink){ l('phDownload', C.downloadLink, 'Download the app'); }
+ if(C.whatsapp){ var w='https://wa.me/'+C.whatsapp; l('phWa', w, C.whatsapp); l('phWaFooter', w, C.whatsapp); }
+})();
+</script>
+<script>
+document.getElementById('buyForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  document.getElementById('formResult').style.display = 'block';
+  this.style.display = 'none';
+  document.getElementById('formResult').scrollIntoView({behavior:'smooth', block:'center'});
+});
+</script>
+
+</body>
+</html>
